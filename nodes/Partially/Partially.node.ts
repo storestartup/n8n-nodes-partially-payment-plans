@@ -637,9 +637,14 @@ export class Partially implements INodeType {
                 // TODO https://developer.partial.ly/#get-contract-pdf
                 // this one returns PDF binary, not json like other operations
                 // need to figure out how to handle this in n8n
+                
                 // https://developer.partial.ly/#create-a-payment-schedule
                 if (operation === 'create') {
-                    
+                    const data = perpareOfferData(this, i);
+                    data.payment_plan_id = this.getNodeParameter('payment_plan_id', i) as string;
+                    data.amount = this.getNodeParameter('amount', i) as number;
+                    responseData = await partiallyApiRequest.call(this, 'POST', '/payment_schedule', data);
+                    returnData.push(responseData);
                 }
                 // https://developer.partial.ly/#add-a-contract-signature
                 if (operation === 'add_contract_signature') {
