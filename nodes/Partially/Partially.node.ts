@@ -47,6 +47,21 @@ import {
     paymentScheduleFields,
 } from "./PaymentScheduleDescription";
 
+import {
+    installmentOperations,
+    installmentFields,
+} from "./InstallmentDescription";
+
+import {
+    refundOperations,
+    refundFields,
+} from "./RefundDescription";
+
+import {
+    disputeOperations,
+    disputeFields,
+} from "./DisputeDescription";
+
 import { partiallyApiRequest } from "./GenericFunctions";
 import { perpareOfferData } from "./OfferFunctions";
 
@@ -109,6 +124,18 @@ export class Partially implements INodeType {
                     {
                         name: 'Payment Schedule',
                         value: 'payment_schedule',
+                    },
+                    {
+                        name: 'Installment',
+                        value: 'installment',
+                    },
+                    {
+                        name: 'Refund',
+                        value: 'refund',
+                    },
+                    {
+                        name: 'Dispute',
+                        value: 'dispute',
                     }
                 ],
             },
@@ -128,6 +155,12 @@ export class Partially implements INodeType {
             ...paymentFields,
             ...paymentScheduleOperations,
             ...paymentScheduleFields,
+            ...installmentOperations,
+            ...installmentFields,
+            ...refundOperations,
+            ...refundFields,
+            ...disputeOperations,
+            ...disputeFields,
         ]
     };
 
@@ -657,6 +690,79 @@ export class Partially implements INodeType {
                     if (userAgent) data.user_agent = userAgent;
                     responseData = await partiallyApiRequest.call(this, 'POST', `/payment_schedule/add_contract_signature/${paymentScheduleId}`, data);
                     returnData.push(responseData);
+                }
+            }
+            if (resource === 'installment') {
+                // https://developer.partial.ly/#pay-scheduled-installment
+                if (operation === 'pay') {
+                    const installmentId = this.getNodeParameter('installment_id', i) as string;
+                    const data: IDataObject = {};
+                    const returnUrl = this.getNodeParameter('return_url', i) as string;
+                    if (returnUrl) data.return_url = returnUrl;
+                    responseData = await partiallyApiRequest.call(this, 'PUT', `/installment/pay/${installmentId}`, data);
+                    returnData.push(responseData);
+                }
+                // https://developer.partial.ly/#list-installments
+                if (operation === 'list') {
+                    const body: IDataObject = {};
+                    const qs: IDataObject = {};
+                    const customerId = this.getNodeParameter('customer_id', i) as string;
+                    if (customerId) qs.customer_id = customerId;
+                    const paymentScheduleId = this.getNodeParameter('payment_schedule_id', i) as string;
+                    if (paymentScheduleId) qs.payment_schedule_id = paymentScheduleId;
+                    responseData = await partiallyApiRequest.call(this, 'GET', '/installment', body, qs);
+                    returnData.push(responseData);
+                }
+            }
+            if (resource === 'refund') {
+                // https://developer.partial.ly/#refund-a-payment
+                if (operation === 'create') {
+                    const data: IDataObject = {};
+                    data.payment_id = this.getNodeParameter('payment_id', i) as string;
+                    data.amount = this.getNodeParameter('amount', i) as number;
+                    const notes = this.getNodeParameter('notes', i) as string;
+                    if (notes) data.notes = notes;
+                    responseData = await partiallyApiRequest.call(this, 'POST', '/refund', data);
+                    returnData.push(responseData);
+                }   
+                // https://developer.partial.ly/#list-refunds
+                if (operation === 'list') {
+                    const body: IDataObject = {};
+                    const qs: IDataObject = {};
+                    const customerId = this.getNodeParameter('customer_id', i) as string;
+                    if (customerId) qs.customer_id = customerId;
+                    const additionalFilters = this.getNodeParameter('additionalFilters', i) as IDataObject;
+                    if (additionalFilters.reason) qs.reason = additionalFilters.reason as string;
+                    if (additionalFilters.date) qs.date = new Date(additionalFilters.date as string).toISOString().split('T')[0];
+                    if (additionalFilters.date_range_min && additionalFilters.date_range_max) {
+                        const minDate = new Date(additionalFilters.date_range_min as string).toISOString().split('T')[0];
+                        const maxDate = new Date(additionalFilters.date_range_max as string).toISOString().split('T')[0];
+                        const range = `${minDate}|${maxDate}`;
+                        qs.dateRange = range;
+                    }
+                    responseData = await partiallyApiRequest.call(this, 'GET', '/refund', body, qs);
+                    returnData.push(responseData);
+                }
+            }
+            if (resource === 'dispute') {
+                // https://developer.partial.ly/#disputes
+                if (operation === 'list') {
+                    const body: IDataObject = {};
+                    const qs: IDataObject = {};
+                    const customerId = this.getNodeParameter('customer_id', i) as string;
+                    if (customerId) qs.customer_id = customerId;
+                    const additionalFilters = this.getNodeParameter('additionalFilters', i) as IDataObject;
+                    if (additionalFilters.status) qs.status = additionalFilters.status as string;
+                    if (additionalFilters.reason) qs.reason = additionalFilters.reason as string;
+                    if (additionalFilters.date) qs.date = new Date(additionalFilters.date as string).toISOString().split('T')[0];
+                    if (additionalFilters.date_range_min && additionalFilters.date_range_max) {
+                        const minDate = new Date(additionalFilters.date_range_min as string).toISOString().split('T')[0];
+                        const maxDate = new Date(additionalFilters.date_range_max as string).toISOString().split('T')[0];
+                        const range = `${minDate}|${maxDate}`;
+                        qs.dateRange = range;
+                    }
+                    responseData = await partiallyApiRequest.call(this, 'GET', '/dispute', body, qs);
+                    returnData.push(responseData);  
                 }
             }
         }
