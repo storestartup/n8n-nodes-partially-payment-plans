@@ -3,14 +3,13 @@
     "version": "0.1.0",
     "description": "Partially Payment Plans nodes for triggering from webhooks and all API calls",
     "keywords": [
-        "n8n-community-node-package, partially, payment plans"
+        "n8n-community-node-package",
+        "partially",
+        "payment plans"
     ],
     "license": "MIT",
     "homepage": "https://github.com/storestartup/n8n-nodes-partially-payment-plans",
-    "author": {
-        "name": "Andrew Schmid",
-        "email": "andrew@storestartup.com"
-    },
+    "author": "Andrew Schmid <andrew@storestartup.com> (https://partial.ly)",
     "engines": {
         "node": ">=18.10",
         "pnpm": ">=9.1"
