@@ -14,7 +14,7 @@ export class PartiallyTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Partially Trigger',
 		name: 'partiallyTrigger',
-		icon: 'file:icon-color.svg',
+		icon: 'file:partially.svg',
 		group: ['trigger'],
 		version: 1,
 		description: 'Handle Partially events via webhooks',
@@ -26,7 +26,7 @@ export class PartiallyTrigger implements INodeType {
 		credentials: [
 			{
 				name: 'partiallyApi',
-				required: true,
+				required: true
 			},
 		],
 		webhooks: [
