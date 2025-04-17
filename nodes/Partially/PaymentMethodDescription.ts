@@ -5,8 +5,9 @@ export const paymentMethodOperations: INodeProperties[] = [
         displayName: 'Operation',
         name: 'operation',
         type: 'options',
+								noDataExpression: true,
         required: true,
-        default: 'create',
+        default: 'list',
         displayOptions: {
             show: {
                 resource: ['payment_method'],
@@ -16,10 +17,12 @@ export const paymentMethodOperations: INodeProperties[] = [
             {
                 name: 'List',
                 value: 'list',
+																action: 'List a payment method',
             },
             {
                 name: 'Delete',
                 value: 'delete',
+																action: 'Delete a payment method',
             },
         ],
     },

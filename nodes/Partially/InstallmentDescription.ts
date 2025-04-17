@@ -5,6 +5,7 @@ export const installmentOperations: INodeProperties[] = [
         displayName: 'Operation',
         name: 'operation',
         type: 'options',
+								noDataExpression: true,
         required: true,
         default: 'pay',
         displayOptions: {
@@ -17,11 +18,13 @@ export const installmentOperations: INodeProperties[] = [
                 name: 'Pay',
                 value: 'pay',
                 description: 'Pay an installment',
+																action: 'Pay an installment',
             },
             {
                 name: 'List',
                 value: 'list',
                 description: 'List all installments',
+																action: 'List an installment',
             }
         ]
     }
@@ -46,7 +49,6 @@ export const installmentFields: INodeProperties[] = [
         displayName: 'Return URL',
         name: 'return_url',
         type: 'string',
-        required: false,
         default: '',
         displayOptions: {
             show: {
@@ -60,7 +62,6 @@ export const installmentFields: INodeProperties[] = [
         displayName: 'Customer ID',
         name: 'customer_id',
         type: 'string',
-        required: false,
         default: '',
         displayOptions: {
             show: {
@@ -73,7 +74,6 @@ export const installmentFields: INodeProperties[] = [
         displayName: 'Payment Schedule ID',
         name: 'payment_schedule_id',
         type: 'string',
-        required: false,
         default: '',
         displayOptions: {
             show: {

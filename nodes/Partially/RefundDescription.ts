@@ -5,6 +5,7 @@ export const refundOperations: INodeProperties[] = [
         displayName: 'Operation',
         name: 'operation',
         type: 'options',
+								noDataExpression: true,
         required: true,
         default: 'create',
         displayOptions: {
@@ -17,11 +18,13 @@ export const refundOperations: INodeProperties[] = [
                 name: 'Create',
                 value: 'create',
                 description: 'Create a refund',
+																action: 'Create a refund',
             },
             {
                 name: 'List',
                 value: 'list',
                 description: 'List all refunds',
+																action: 'List a refund',
             }
         ]
     }
@@ -59,7 +62,6 @@ export const refundFields: INodeProperties[] = [
         displayName: 'Notes',
         name: 'notes',
         type: 'string',
-        required: false,
         default: '',
         displayOptions: {
             show: {
@@ -73,7 +75,6 @@ export const refundFields: INodeProperties[] = [
         displayName: 'Customer ID',
         name: 'customer_id',
         type: 'string',
-        required: false,
         default: '',
         displayOptions: {   
             show: {
@@ -83,10 +84,9 @@ export const refundFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Additional filters',
+        displayName: 'Additional Filters',
         name: 'additionalFilters',
         type: 'collection',
-        required: false,
         default: {},
         displayOptions: {
             show: {
@@ -99,10 +99,10 @@ export const refundFields: INodeProperties[] = [
                 displayName: 'Reason',
                 name: 'reason',
                 type: 'options',
-                default: '',
+                default: 'requested_by_customer',
                 options: [
                     {
-                        name: 'Requested by customer',
+                        name: 'Requested by Customer',
                         value: 'requested_by_customer',
                     },
                     {
@@ -122,13 +122,13 @@ export const refundFields: INodeProperties[] = [
                 default: ''
             },
             {
-                displayName: 'Date range minimum',
+                displayName: 'Date Range Minimum',
                 name: 'date_range_min',
                 type: 'dateTime',
                 default: ''
             },
             {
-                displayName: 'Date range maximum',
+                displayName: 'Date Range Maximum',
                 name: 'date_range_max',
                 type: 'dateTime',
                 default: ''

@@ -5,6 +5,7 @@ export const lineItemOperations: INodeProperties[] = [
         displayName: 'Operation',
         name: 'operation',
         type: 'options',
+								noDataExpression: true,
         required: true,
         default: 'create',
         displayOptions: {
@@ -16,10 +17,12 @@ export const lineItemOperations: INodeProperties[] = [
             {
                 name: 'Create',
                 value: 'create',
+																action: 'Create a line item',
             },
             {
                 name: 'Delete',
                 value: 'delete',
+																action: 'Delete a line item',
             },
         ],
     },
@@ -84,7 +87,6 @@ export const lineItemFields: INodeProperties[] = [
         displayName: 'Image URL',
         name: 'image_url',
         type: 'string',
-        required: false,
         default: '',
         displayOptions: {   
             show: {
@@ -97,7 +99,6 @@ export const lineItemFields: INodeProperties[] = [
         displayName: 'Weight',
         name: 'weight',
         type: 'number',
-        required: false,
         default: 0,
         displayOptions: {
             show: {
@@ -110,7 +111,6 @@ export const lineItemFields: INodeProperties[] = [
         displayName: 'Weight Unit',
         name: 'weight_unit',
         type: 'options',
-        required: false,
         default: 'lb',
         displayOptions: {
             show: {
@@ -120,19 +120,19 @@ export const lineItemFields: INodeProperties[] = [
         },
         options: [
             {
-                name: 'g',
+                name: 'G',
                 value: 'g',
             },
             {
-                name: 'kg',
+                name: 'Kg',
                 value: 'kg',
             },
             {
-                name: 'oz',
+                name: 'Oz',
                 value: 'oz',
             },
             {
-                name: 'lb',
+                name: 'Lb',
                 value: 'lb',
             },
         ],
@@ -141,7 +141,6 @@ export const lineItemFields: INodeProperties[] = [
         displayName: 'Integration',
         name: 'integration',
         type: 'string',
-        required: false,
         default: '',
         displayOptions: {
             show: {
@@ -149,13 +148,12 @@ export const lineItemFields: INodeProperties[] = [
                 resource: ['line_item'],
             },
         },
-        description: 'third party service to send line item to, ex. shopify or bigcommerce'
+        description: 'Third party service to send line item to, ex. shopify or bigcommerce.'
     },
     {
         displayName: 'Integration ID',
         name: 'integration_id',
         type: 'string',
-        required: false,
         default: '',    
         displayOptions: {
             show: {
@@ -163,10 +161,10 @@ export const lineItemFields: INodeProperties[] = [
                 resource: ['line_item'],
             },
         },
-        description: 'id of the line item in the third party service'
+        description: 'ID of the line item in the third party service'
     },
     {
-        displayName: 'Custom metadata',
+        displayName: 'Custom Metadata',
         name: 'metadata',
         type: 'fixedCollection',
         default: {},
@@ -185,15 +183,15 @@ export const lineItemFields: INodeProperties[] = [
                 displayName: 'Metadata',
                 values: [
                     {
-                        name: 'name',
                         displayName: 'Name',
+                        name: 'name',
                         type: 'string',
                         placeholder: 'Name of the metadata key to add',
                         default: '',
                     },
                     {
-                        name: 'value',
                         displayName: 'Value',
+                        name: 'value',
                         type: 'string',
                         placeholder: 'Value to set for the metadata key',
                         default: '',

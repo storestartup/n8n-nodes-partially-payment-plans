@@ -1,12 +1,12 @@
 {
-    "name": "n8n-nodes-partially-trigger",
+    "name": "n8n-nodes-partially-payment-plans",
     "version": "0.1.0",
-    "description": "",
+    "description": "Partially Payment Plans nodes for triggering from webhooks and all API calls",
     "keywords": [
-        "n8n-community-node-package"
+        "n8n-community-node-package, partially, payment plans"
     ],
     "license": "MIT",
-    "homepage": "",
+    "homepage": "https://github.com/storestartup/n8n-nodes-partially-payment-plans",
     "author": {
         "name": "Andrew Schmid",
         "email": "andrew@storestartup.com"
@@ -40,13 +40,14 @@
         ]
     },
     "devDependencies": {
+        "@types/node": "^20.11.24",
         "@typescript-eslint/parser": "^7.15.0",
         "eslint": "^8.56.0",
         "eslint-plugin-n8n-nodes-base": "^1.16.1",
         "gulp": "^4.0.2",
+        "jsonc-eslint-parser": "^2.4.0",
         "prettier": "^3.3.2",
-        "typescript": "^5.5.3",
-        "@types/node": "^20.11.24"
+        "typescript": "^5.5.3"
     },
     "peerDependencies": {
         "n8n-workflow": "*"

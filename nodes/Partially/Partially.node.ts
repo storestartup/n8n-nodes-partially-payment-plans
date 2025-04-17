@@ -3,8 +3,7 @@ import {
     IExecuteFunctions,
     INodeExecutionData,
     INodeType,
-    INodeTypeDescription,
-    NodeConnectionType,
+    INodeTypeDescription
 } from "n8n-workflow";
 
 import {
@@ -69,9 +68,10 @@ export class Partially implements INodeType {
     description: INodeTypeDescription = {
         displayName: "Partially",
         name: "partially",
-        icon: "file:partially.png",
+        icon: "file:icon-color.svg",
         group: ["transform"],
         version: 1,
+								subtitle: '={{ $parameter["operation"] + ": " + $parameter["resource"] }}',
         description: "Partially Payment Plans API",
         defaults: {
             name: "Partially",
@@ -82,8 +82,8 @@ export class Partially implements INodeType {
                 required: true
             },
         ],
-        inputs: [NodeConnectionType.Main],
-        outputs: [NodeConnectionType.Main],
+        inputs: ['main'],
+        outputs: ['main'],
         properties: [
             {
                 displayName: 'Resource',
@@ -98,8 +98,16 @@ export class Partially implements INodeType {
                         value: 'customer',
                     },
                     {
-                        name: 'Payment Plan',
-                        value: 'payment_plan',
+                        name: 'Dispute',
+                        value: 'dispute',
+                    },
+                    {
+                        name: 'Installment', 
+                        value: 'installment',
+                    },
+                    {
+                        name: 'Line Item',
+                        value: 'line_item',
                     },
                     {
                         name: 'Offer',
@@ -110,32 +118,24 @@ export class Partially implements INodeType {
                         value: 'offer_item',
                     },
                     {
+                        name: 'Payment',
+                        value: 'payment',
+                    },
+                    {
                         name: 'Payment Method',
                         value: 'payment_method',
                     },
                     {
-                        name: 'Line Item',
-                        value: 'line_item',
-                    },
-                    {
-                        name: 'Payment',
-                        value: 'payment',
+                        name: 'Payment Plan',
+                        value: 'payment_plan',
                     },
                     {
                         name: 'Payment Schedule',
                         value: 'payment_schedule',
                     },
                     {
-                        name: 'Installment',
-                        value: 'installment',
-                    },
-                    {
                         name: 'Refund',
                         value: 'refund',
-                    },
-                    {
-                        name: 'Dispute',
-                        value: 'dispute',
                     }
                 ],
             },

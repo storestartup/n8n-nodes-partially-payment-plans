@@ -5,6 +5,7 @@ export const paymentOperations: INodeProperties[] = [
         displayName: 'Operation',
         name: 'operation',
         type: 'options',
+								noDataExpression: true,
         required: true,
         default: 'create',
         displayOptions: {   
@@ -16,18 +17,22 @@ export const paymentOperations: INodeProperties[] = [
             {
                 name: 'Create',
                 value: 'create',
+																action: 'Create a payment',
             },
             {
                 name: 'Confirm',
                 value: 'confirm',
+																action: 'Confirm a payment',
             },
             {
                 name: 'List',
                 value: 'list',
+																action: 'List a payment',
             },
             {
                 name: 'Get',
                 value: 'get',
+																action: 'Get a payment',
             },
         ],
     },
@@ -65,7 +70,6 @@ export const paymentFields: INodeProperties[] = [
         displayName: 'Return URL',
         name: 'return_url',
         type: 'string',
-        required: false,
         default: '',
         displayOptions: {
             show: {
@@ -73,11 +77,11 @@ export const paymentFields: INodeProperties[] = [
                 resource: ['payment'],
             },
         },
-        description: 'your URL to redirect user to after 3d secure authentication'
+        description: 'Your URL to redirect user to after 3d secure authentication'
     },
     // payment:confirm
     {
-        displayName: 'Contract signature',
+        displayName: 'Contract Signature',
         name: 'contract_signature',
         type: 'string',
         required: true,
@@ -88,14 +92,13 @@ export const paymentFields: INodeProperties[] = [
                 resource: ['payment'],
             },
         },
-        description: 'customer signature for the new payment schedule contract'
+        description: 'Customer signature for the new payment schedule contract'
     },
     // payment:list
     {
         displayName: 'Customer ID',
         name: 'customer_id',
         type: 'string',
-        required: false,
         default: '',
         displayOptions: {
             show: {
@@ -108,7 +111,6 @@ export const paymentFields: INodeProperties[] = [
         displayName: 'Payment Plan ID',
         name: 'payment_plan_id',
         type: 'string',
-        required: false,
         default: '',
         displayOptions: {
             show: {
@@ -118,10 +120,9 @@ export const paymentFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Stripe payment intent ID',
+        displayName: 'Stripe Payment Intent ID',
         name: 'stripe_payment_intent_id',
         type: 'string',
-        required: false,
         default: '',
         displayOptions: {   
             show: {
@@ -131,11 +132,10 @@ export const paymentFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Additional filters',
+        displayName: 'Additional Filters',
         name: 'additional_filters',
         type: 'collection',
-        required: false,
-        default: '',
+        default: {},
         displayOptions: {
             show:    {
                 operation: ['list'],
@@ -144,12 +144,49 @@ export const paymentFields: INodeProperties[] = [
         },
         options: [
             {
-                displayName: 'Payment status',
+                displayName: 'Created Date Range Maximum',
+                name: 'date_max',
+                type: 'dateTime',
+                default: ''
+            },
+            {
+                displayName: 'Created Date Range Minimum',
+                name: 'date_min',
+                type: 'dateTime',
+                default: ''
+            },
+            {
+                displayName: 'Currency',
+                name: 'currency',
+                type: 'string',
+                default: ''
+            },
+            {
+                displayName: 'Limit',
+                name: 'per_page',
+                type: 'number',
+                default: 10,
+                typeOptions: {
+                    minValue: 1,
+                    maxValue: 100
+                }
+            },
+            {
+                displayName: 'Payment Created Date',
+                name: 'date',
+                type: 'dateTime',
+                default: ''
+            },
+            {
+                displayName: 'Payment Status',
                 name: 'status',
                 type: 'options',
-                required: false,
-                default: '',
+                default: 'paid',
                 options: [
+                    {
+                        name: 'Failed',
+                        value: 'failed',
+                    },
                     {
                         name: 'Paid',
                         value: 'paid',
@@ -157,51 +194,8 @@ export const paymentFields: INodeProperties[] = [
                     {
                         name: 'Pending',
                         value: 'pending',
-                    },
-                    {
-                        name: 'Failed',
-                        value: 'failed',
                     }   
                 ]
-            },
-            {
-                displayName: 'Currency',
-                name: 'currency',
-                type: 'string',
-                required: false,
-                default: ''
-            },
-            {
-                displayName: 'Payment created date',
-                name: 'date',
-                type: 'dateTime',
-                required: false,
-                default: ''
-            },
-            {
-                displayName: 'Created date range minimum',
-                name: 'date_min',
-                type: 'dateTime',
-                required: false,
-                default: ''
-            },
-            {
-                displayName: 'Created date range maximum',
-                name: 'date_max',
-                type: 'dateTime',
-                required: false,
-                default: ''
-            },
-            {
-                displayName: 'Limit',
-                name: 'per_page',
-                type: 'number',
-                required: false,
-                default: 10,
-                typeOptions: {
-                    minValue: 1,
-                    maxValue: 100
-                }
             }
         ]   
     },

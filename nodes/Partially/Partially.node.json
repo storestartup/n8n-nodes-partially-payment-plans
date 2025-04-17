@@ -6,12 +6,12 @@
     "resources": {
         "credentialDocumentation": [
             {
-                "url": ""
+                "url": "https://developer.partial.ly/#authentication"
             }
         ],
         "primaryDocumentation": [
             {
-                "url": ""
+                "url": "https://developer.partial.ly/#introduction"
             }
         ]
     }

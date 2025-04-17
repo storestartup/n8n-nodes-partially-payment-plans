@@ -5,6 +5,7 @@ export const offerItemOperations: INodeProperties[] = [
         displayName: 'Operation',
         name: 'operation',
         type: 'options',
+								noDataExpression: true,
         required: true,
         default: 'create',
         displayOptions: {
@@ -16,18 +17,22 @@ export const offerItemOperations: INodeProperties[] = [
             {
                 name: 'List',
                 value: 'list',
+																action: 'List an offer item',
             },
             {
                 name: 'Create',
                 value: 'create',
+																action: 'Create an offer item',
             },
             {
                 name: 'Update',
                 value: 'update',
+																action: 'Update an offer item',
             },
             {
                 name: 'Delete',
                 value: 'delete',
+																action: 'Delete an offer item',
             },
         ],
     },
@@ -63,7 +68,7 @@ export const offerItemFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Amount type',
+        displayName: 'Amount Type',
         name: 'amount_type',
         type: 'options',
         required: true,

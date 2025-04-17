@@ -5,6 +5,7 @@ export const paymentPlanOperations: INodeProperties[] = [
         displayName: 'Operation',
         name: 'operation',
         type: 'options',
+								noDataExpression: true,
         required: true,
         default: 'create',
         displayOptions: {   
@@ -14,39 +15,46 @@ export const paymentPlanOperations: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Create',
-                value: 'create',
-                description: 'Create a new payment plan',
-            },
-            {
-                name: 'Open',
-                value: 'open',
-                description: 'Open a payment plan',
-            },
-            {
                 name: 'Cancel',
                 value: 'cancel',
                 description: 'Cancel a payment plan',
+																action: 'Cancel a payment plan',
+            },
+            {
+                name: 'Create', 
+                value: 'create',
+                description: 'Create a new payment plan',
+																action: 'Create a payment plan',
             },
             {
                 name: 'Get',
-                value: 'get',
+                value: 'get', 
                 description: 'Get a payment plan',
-            },
-            {
-                name: 'Update',
-                value: 'update',
-                description: 'Update a payment plan',   
+																action: 'Get a payment plan',
             },
             {
                 name: 'List',
                 value: 'list',
                 description: 'List all payment plans',
+																action: 'List a payment plan',
             },
             {
-                name: 'Send plan request',
+                name: 'Open',
+                value: 'open',
+                description: 'Open a payment plan',
+																action: 'Open a payment plan',
+            },
+            {
+                name: 'Send Plan Request',
                 value: 'send_plan_request',
                 description: 'Send a plan request to the customer',
+																action: 'Send plan request a payment plan',
+            },
+            {
+                name: 'Update',
+                value: 'update',
+                description: 'Update a payment plan',
+																action: 'Update a payment plan',   
             }
         ]
     }
@@ -82,7 +90,7 @@ export const paymentPlanFields: INodeProperties[] = [
         description: 'If not provided, will default to the currency in Partially settings, or the currency of the provided offer',
     },
     {
-        displayName: 'Customer details',
+        displayName: 'Customer Details',
         name: 'customer_type',
         type: 'options',
         required: true,
@@ -95,11 +103,11 @@ export const paymentPlanFields: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Use existing customer id',
+                name: 'Use Existing Customer ID',
                 value: 'existing',
             },
             {
-                name: 'Provide customer details',
+                name: 'Provide Customer Details',
                 value: 'new',
             }
         ],
@@ -118,7 +126,7 @@ export const paymentPlanFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Customer email',
+        displayName: 'Customer Email',
         name: 'customer_email',
         type: 'string',
         default: '',
@@ -131,7 +139,7 @@ export const paymentPlanFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Customer first name',
+        displayName: 'Customer First Name',
         name: 'customer_first_name',
         type: 'string',
         default: '',
@@ -144,7 +152,7 @@ export const paymentPlanFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Customer last name',
+        displayName: 'Customer Last Name',
         name: 'customer_last_name',
         type: 'string',
         default: '',
@@ -157,7 +165,7 @@ export const paymentPlanFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Additional customer fields',
+        displayName: 'Additional Customer Fields',
         name: 'customerAdditionalFields',
         type: 'collection',
         placeholder: 'Add Field',
@@ -171,12 +179,6 @@ export const paymentPlanFields: INodeProperties[] = [
         },
         options: [
             {
-                displayName: 'Phone number',
-                name: 'phone',
-                type: 'string',
-                default: '',
-            },
-            {
                 displayName: 'Language',
                 name: 'language',
                 type: 'string',
@@ -184,57 +186,63 @@ export const paymentPlanFields: INodeProperties[] = [
                 description: 'Two letter language code (e.g. "en", "fr", "de")',
             },
             {
-                displayName: 'Timezone',
-                name: 'timezone',
+                displayName: 'Phone Number', 
+                name: 'phone',
                 type: 'string',
                 default: '',
-                description: 'Timezone (e.g. "America/New_York", "Europe/London")',
             },
             {
-                displayName: 'Shipping name',
+                displayName: 'Shipping Address',
+                name: 'shipto_address',
+                type: 'string',
+                default: '',
+            },
+            {
+                displayName: 'Shipping Address Line 2',
+                name: 'shipto_address2',
+                type: 'string',
+                default: '',
+            },
+            {
+                displayName: 'Shipping City',
+                name: 'shipto_city',
+                type: 'string',
+                default: '',
+            },
+            {
+                displayName: 'Shipping Country',
+                name: 'shipto_country',
+                type: 'string',
+                default: '',
+                description: 'Two letter country code (e.g. "US", "CA", "UK")',
+            },
+            {
+                displayName: 'Shipping Name',
                 name: 'shipto_name',
                 type: 'string',
                 default: '',
                 description: 'Ship to name for customer payment plans',
             },
             {
-                displayName: 'Shipping address',
-                name: 'shipto_address',
-                type: 'string',
-                default: '',
-            },
-            {
-                displayName: 'Shipping address line 2',
-                name: 'shipto_address2',
-                type: 'string',
-                default: '',
-            },
-            {
-                displayName: 'Shipping city',
-                name: 'shipto_city',
-                type: 'string',
-                default: '',
-            },
-            {
-                displayName: 'Shipping state',
+                displayName: 'Shipping State',
                 name: 'shipto_state',
                 type: 'string',
                 default: '',
                 description: 'Two letter state, province, or region code (e.g. "NY", "CA", "TX")',
             },
             {
-                displayName: 'Shipping zip',
+                displayName: 'Shipping Zip',
                 name: 'shipto_postal_code',
                 type: 'string',
                 default: '',
                 description: 'Shipping zip or postal code',
             },
             {
-                displayName: 'Shipping country',
-                name: 'shipto_country',
+                displayName: 'Timezone',
+                name: 'timezone',
                 type: 'string',
                 default: '',
-                description: 'Two letter country code (e.g. "US", "CA", "UK")',
+                description: 'Timezone (e.g. "America/New_York", "Europe/London")',
             },
         ]
     },
@@ -251,11 +259,11 @@ export const paymentPlanFields: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Provide an offer id',
+                name: 'Provide an Offer ID',
                 value: 'offer_id',
             },
             {
-                name: 'Provide a payment schedule',
+                name: 'Provide a Payment Schedule',
                 value: 'payment_schedule',
             },
         ],
@@ -274,7 +282,7 @@ export const paymentPlanFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Automatically schedule installments',
+        displayName: 'Automatically Schedule Installments',
         name: 'payment_schedule_auto_process',
         type: 'boolean',
         default: true,
@@ -285,10 +293,10 @@ export const paymentPlanFields: INodeProperties[] = [
                 terms: ['payment_schedule'],
             },
         },
-        description: 'If true, the installments will be scheduled automatically according to the provided schedule',
+        description: 'Whether or not the installments will be scheduled automatically according to the provided schedule',
     },
     {
-        displayName: 'Payment schedule description',
+        displayName: 'Payment Schedule Description',
         name: 'payment_schedule_description',
         type: 'string',
         default: '',
@@ -306,7 +314,7 @@ export const paymentPlanFields: INodeProperties[] = [
         description: 'A description of when you will process payments',
     },
     {
-        displayName: 'Down payment type',
+        displayName: 'Down Payment Type',
         name: 'payment_schedule_down_payment_type',
         type: 'options',
         default: 'percentage',
@@ -320,17 +328,17 @@ export const paymentPlanFields: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Percentage of plan amount',
+                name: 'Percentage of Plan Amount',
                 value: 'percentage',
             },
             {
-                name: 'Fixed amount',
+                name: 'Fixed Amount',
                 value: 'fixed',
             }
         ]
     },
     {
-        displayName: 'Down payment amount/percentage',
+        displayName: 'Down Payment Amount/percentage',
         name: 'payment_schedule_down_payment',
         type: 'number',
         default: 0,
@@ -344,7 +352,7 @@ export const paymentPlanFields: INodeProperties[] = [
         }   
     },
     {
-        displayName: 'Down payment flexible',
+        displayName: 'Down Payment Flexible',
         name: 'payment_schedule_down_payment_flexible',
         type: 'boolean',
         default: false,
@@ -356,10 +364,10 @@ export const paymentPlanFields: INodeProperties[] = [
                 payment_schedule_auto_process: [true],
             }
         },
-        description: 'allow the customer to choose their down payment within a specified range',
+        description: 'Whether or not the customer can choose their down payment within a specified range',
     },
     {
-        displayName: 'Minimum down payment amount/percentage',
+        displayName: 'Minimum Down Payment Amount/percentage',
         name: 'payment_schedule_down_payment_min',
         type: 'number',
         default: 0,
@@ -374,7 +382,7 @@ export const paymentPlanFields: INodeProperties[] = [
         }   
     },
     {
-        displayName: 'Maximum down payment amount/percentage',
+        displayName: 'Maximum Down Payment Amount/percentage',
         name: 'payment_schedule_down_payment_max',
         type: 'number',
         default: 0,
@@ -389,7 +397,7 @@ export const paymentPlanFields: INodeProperties[] = [
         }   
     },
     {
-        displayName: 'Term units',
+        displayName: 'Term Units',
         name: 'payment_schedule_term_units',
         type: 'options',
         default: 'months',
@@ -403,29 +411,29 @@ export const paymentPlanFields: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Weeks',
-                value: 'weeks',
+                name: 'Date',
+                value: 'date',
+            },
+            {
+                name: 'Fixed Number of Payments', 
+                value: 'payments',
             },
             {
                 name: 'Months',
                 value: 'months',
             },
             {
+                name: 'Weeks',
+                value: 'weeks',
+            },
+            {
                 name: 'Years',
                 value: 'years',
-            },
-            {
-                name: 'Fixed number of payments',
-                value: 'payments',
-            },
-            {
-                name: 'Date',
-                value: 'date',
             }
         ]
     },
     {
-        displayName: 'Term value',
+        displayName: 'Term Value',
         name: 'payment_schedule_term',
         type: 'number',
         default: 3,
@@ -441,7 +449,7 @@ export const paymentPlanFields: INodeProperties[] = [
         description: 'The number of weeks, months, years, or payments',
     },
     {
-        displayName: 'Final payment date',
+        displayName: 'Final Payment Date',
         name: 'payment_schedule_term_date',
         type: 'dateTime',
         default: '',
@@ -457,7 +465,7 @@ export const paymentPlanFields: INodeProperties[] = [
         description: 'The date of the final payment (time will be ignored)',
     },
     {
-        displayName: 'Term flexible',
+        displayName: 'Term Flexible',
         name: 'payment_schedule_term_flexible',
         type: 'boolean',
         default: false,
@@ -470,10 +478,10 @@ export const paymentPlanFields: INodeProperties[] = [
                 payment_schedule_term_units: ['weeks', 'months', 'years', 'payments'],
             }
         },
-        description: 'allow the customer to choose their payment frequency within the specified range',
+        description: 'Whether or not the customer can choose their payment frequency within the specified range',
     },
     {
-        displayName: 'Minimum term',
+        displayName: 'Minimum Term',
         name: 'payment_schedule_term_min',
         type: 'number',
         default: 1,
@@ -489,7 +497,7 @@ export const paymentPlanFields: INodeProperties[] = [
         description: 'The minimum number of weeks, months, years, or payments',
     },
     {
-        displayName: 'Maximum term',
+        displayName: 'Maximum Term',
         name: 'payment_schedule_term_max',
         type: 'number',
         default: 99,
@@ -505,7 +513,7 @@ export const paymentPlanFields: INodeProperties[] = [
         description: 'The maximum number of weeks, months, years, or payments',
     },
     {
-        displayName: 'Frequency units',
+        displayName: 'Frequency Units',
         name: 'payment_schedule_frequency_units',
         type: 'options',
         default: 'months',
@@ -531,13 +539,13 @@ export const paymentPlanFields: INodeProperties[] = [
                 value: 'months',
             },
             {
-                name: 'Specific days of the month',
+                name: 'Specific Days of the Month',
                 value: 'days_month',
             }
         ]
     },
     {
-        displayName: 'Frequency value',
+        displayName: 'Frequency Value',
         name: 'payment_schedule_frequency',
         type: 'number',
         default: 1,
@@ -553,7 +561,7 @@ export const paymentPlanFields: INodeProperties[] = [
         description: 'The number of days, weeks, or months between payments',
     },
     {
-        displayName: 'Days of the month',
+        displayName: 'Days of the Month',
         name: 'payment_schedule_frequency_days',
         type: 'string',
         default: '1,15',
@@ -566,10 +574,10 @@ export const paymentPlanFields: INodeProperties[] = [
                 payment_schedule_frequency_units: ['days_month'],
             }
         },
-        description: 'The days of the month to process payments (comma separated)',
+        description: 'The days of the month to process payments (comma-separated)',
     },
     {
-        displayName: 'Frequency flexible',
+        displayName: 'Frequency Flexible',
         name: 'payment_schedule_frequency_flexible',
         type: 'boolean',
         default: false,
@@ -582,10 +590,10 @@ export const paymentPlanFields: INodeProperties[] = [
                 payment_schedule_frequency_units: ['days', 'weeks', 'months'],
             }
         },
-        description: 'allow the customer to choose their payment frequency within the specified range',
+        description: 'Whether or not the customer can choose their payment frequency within the specified range',
     },
     {
-        displayName: 'Minimum frequency',
+        displayName: 'Minimum Frequency',
         name: 'payment_schedule_frequency_min',
         type: 'number',
         default: 1,
@@ -602,7 +610,7 @@ export const paymentPlanFields: INodeProperties[] = [
         description: 'The minimum number of days, weeks, or months between payments',
     },
     {
-        displayName: 'Maximum frequency',
+        displayName: 'Maximum Frequency',
         name: 'payment_schedule_frequency_max',
         type: 'number',
         default: 99,
@@ -619,7 +627,7 @@ export const paymentPlanFields: INodeProperties[] = [
         description: 'The maximum number of days, weeks, or months between payments',
     },
     {
-        displayName: 'Automatically schedule first installment',
+        displayName: 'Automatically Schedule First Installment',
         name: 'payment_schedule_starts_auto',
         type: 'boolean',
         default: true,
@@ -631,10 +639,10 @@ export const paymentPlanFields: INodeProperties[] = [
                 payment_schedule_auto_process: [true],
             }
         },
-        description: 'If true, the first installment will be scheduled relative to the plan opened date',
+        description: 'Whether or not the first installment will be scheduled relative to the plan opened date',
     },
     {
-        displayName: 'Date of first installment',
+        displayName: 'Date of First Installment',
         name: 'payment_schedule_starts_date',
         type: 'dateTime',
         default: '',
@@ -651,7 +659,7 @@ export const paymentPlanFields: INodeProperties[] = [
     },
     // custom metadata
     {
-        displayName: 'Custom metadata',
+        displayName: 'Custom Metadata',
         name: 'metadata',
         type: 'fixedCollection',
         default: {},
@@ -670,15 +678,15 @@ export const paymentPlanFields: INodeProperties[] = [
                 displayName: 'Metadata',
                 values: [
                     {
-                        name: 'name',
                         displayName: 'Name',
+                        name: 'name',
                         type: 'string',
                         placeholder: 'Name of the metadata key to add',
                         default: '',
                     },
                     {
-                        name: 'value',
                         displayName: 'Value',
+                        name: 'value',
                         type: 'string',
                         placeholder: 'Value to set for the metadata key',
                         default: '',
@@ -688,7 +696,7 @@ export const paymentPlanFields: INodeProperties[] = [
         ]
     },
     {
-        displayName: 'Line items',
+        displayName: 'Line Items',
         name: 'line_items',
         type: 'fixedCollection',
         default: {},
@@ -704,81 +712,81 @@ export const paymentPlanFields: INodeProperties[] = [
         options: [
             {
                 name: 'items',
-                displayName: 'Line items',
+                displayName: 'Line Items',
                 values: [
                     {
-                        name: 'name',
                         displayName: 'Name',
+                        name: 'name',
                         type: 'string',
                         placeholder: 'description of the line item',
                         default: '',
                         required: true,
                     },
                     {
-                        name: 'quantity',
                         displayName: 'Quantity',
+                        name: 'quantity',
                         type: 'number',
                         placeholder: 'quantity of the line item',
                         default: 1,
                         required: true,
                     },
                     {
-                        name: 'price',
                         displayName: 'Price',
+                        name: 'price',
                         type: 'number',
                         placeholder: 'unit price of the line item',
                         default: 0,
                         required: true,
                     },
                     {
-                        name: 'image',
                         displayName: 'Image URL',
+                        name: 'image',
                         type: 'string',
                         placeholder: 'URL of the image of the line item',
                         default: '',
                     },
                     {
-                        name: 'weight',
                         displayName: 'Weight',
+                        name: 'weight',
                         type: 'number',
                         placeholder: 'weight of the line item',
                         default: 0,
                     },
                     {
+                        displayName: 'Weight Units',
                         name: 'weight_units',
-                        displayName: 'Weight units',
                         type: 'options',
                         placeholder: 'units of the weight of the line item',
                         default: 'kg',
                         options: [
                             {
-                                name: 'kg',
+                                name: 'Kg',
                                 value: 'kg',
                             },
                             {
-                                name: 'g',
+                                name: 'G',
                                 value: 'g',
                             },
                             {
-                                name: 'lb',
+                                name: 'Lb',
                                 value: 'lb',
                             },
                             {
-                                name: 'oz',
+                                name: 'Oz',
                                 value: 'oz',
                             },
                         ]
                     },
                     {
-                        name: 'product_id',
                         displayName: 'Product ID',
+                        name: 'product_id',
                         type: 'string',
                         placeholder: 'ID of the product of the line item',
                         default: '',
                     },
                     {
-                        name: 'variant_id',
                         displayName: 'Variant ID',
+                        name: 'variant_id',
                         type: 'string',
                         placeholder: 'ID of the variant of the line item',
                         default: '',
@@ -788,7 +796,7 @@ export const paymentPlanFields: INodeProperties[] = [
         ]
     },
     {
-        displayName: 'Additional plan fields',
+        displayName: 'Additional Plan Fields',
         name: 'additional_plan_fields',
         type: 'collection',
         placeholder: 'Add Field',
@@ -801,14 +809,33 @@ export const paymentPlanFields: INodeProperties[] = [
         },
         options: [  
             {
+                displayName: 'Create Stripe Payment Intent',
+                name: 'create_stripe_payment_intent',
+                type: 'boolean',
+                default: false,
+                description: 'Whether or not to create a Stripe payment_intent you can use for a Stripe payment element to capture payment method details in your UI'
+            },
+            {
+                displayName: 'Customer IP Address',
+                name: 'ip_address',
+                type: 'string',
+                default: '',
+            },
+            {
+                displayName: 'Customer User Agent',
+                name: 'user_agent',
+                type: 'string',
+                default: '',
+            },
+            {
                 displayName: 'Integration',
                 name: 'integration',
                 type: 'string',
                 default: '',
-                description: 'third party integration to send payment plan to. shopify, woocommerce, bigcommerce, opencart, or prestashop',
+                description: 'Third party integration to send payment plan to. shopify, woocommerce, bigcommerce, opencart, or prestashop.',
             },
             {
-                displayName: 'Plan status',
+                displayName: 'Plan Status',
                 name: 'status',
                 type: 'options',
                 default: 'checkout',
@@ -824,70 +851,51 @@ export const paymentPlanFields: INodeProperties[] = [
                 ]
             },
             {
-                displayName: 'Send plan request to customer',
+                displayName: 'Send Plan Request to Customer',
                 name: 'send_plan_request',
                 type: 'boolean',
                 default: false,
-                description: 'set to true to send a plan request email to customer to complete checkout. plan must be in pending status'
+                description: 'Whether or not to send a plan request email to customer to complete checkout. plan must be in pending status.'
             },
             {
-                displayName: 'Create Stripe payment intent',
-                name: 'create_stripe_payment_intent',
-                type: 'boolean',
-                default: false,
-                description: 'set to true to create a Stripe payment_intent you can use for a Stripe payment element to capture payment method details in your UI'
-            },
-            {
-                displayName: 'Customer IP address',
-                name: 'ip_address',
-                type: 'string',
-                default: '',
-            },
-            {
-                displayName: 'Customer user agent',
-                name: 'user_agent',
-                type: 'string',
-                default: '',
-            },
-            {
-                displayName: 'Shipping name',
-                name: 'shipto_name',
-                type: 'string',
-                default: '',
-            },
-            {
-                displayName: 'Shipping address',
+                displayName: 'Shipping Address',
                 name: 'shipto_address',
                 type: 'string',
                 default: '',
             },
             {
-                displayName: 'Shipping address line 2',
+                displayName: 'Shipping Address Line 2',
                 name: 'shipto_address2',
                 type: 'string',
                 default: '',
             },
             {
-                displayName: 'Shipping city',
+                displayName: 'Shipping City',
                 name: 'shipto_city',
                 type: 'string',
                 default: '',
             },
             {
-                displayName: 'Shipping state',
+                displayName: 'Shipping Country',
+                name: 'shipto_country',
+                type: 'string',
+                default: '',
+            },
+            {
+                displayName: 'Shipping Name',
+                name: 'shipto_name',
+                type: 'string',
+                default: '',
+            },
+            {
+                displayName: 'Shipping State',
                 name: 'shipto_state',
                 type: 'string',
                 default: '',
             },
             {
-                displayName: 'Shipping zip/postal code',
+                displayName: 'Shipping Zip/postal Code',
                 name: 'shipto_postal_code',
-                type: 'string',
-                default: '',
-            },
-            {
-                displayName: 'Shipping country',
-                name: 'shipto_country',
                 type: 'string',
                 default: '',
             }
@@ -895,7 +903,7 @@ export const paymentPlanFields: INodeProperties[] = [
     },
     // payment_plan:open
     {
-        displayName: 'Payment plan id',
+        displayName: 'Payment Plan ID',
         name: 'payment_plan_id',
         type: 'string',
         default: '',
@@ -908,7 +916,7 @@ export const paymentPlanFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Customer contract signature',
+        displayName: 'Customer Contract Signature',
         name: 'customer_contract_signature',
         type: 'string',
         default: '',
@@ -921,7 +929,7 @@ export const paymentPlanFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Payment method ID',
+        displayName: 'Payment Method ID',
         name: 'payment_method_id',
         type: 'string',
         default: '',
@@ -934,22 +942,21 @@ export const paymentPlanFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Authorization return URL',
+        displayName: 'Authorization Return URL',
         name: 'return_url',
         type: 'string',
         default: '',
-        required: false,
         displayOptions: {
             show: {
                 operation: ['open'],
                 resource: ['payment_plan'],
             },
         },
-        description: 'your URL to redirect user to after 3d secure authentication',
+        description: 'Your URL to redirect user to after 3d secure authentication',
     },
     // payment_plan:cancel
     {
-        displayName: 'Payment plan id',
+        displayName: 'Payment Plan ID',
         name: 'payment_plan_id',
         type: 'string',
         default: '',
@@ -962,7 +969,7 @@ export const paymentPlanFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Cancel associated Shopify order',
+        displayName: 'Cancel Associated Shopify Order',
         name: 'cancel_shopify',
         type: 'boolean',
         default: false,
@@ -974,7 +981,7 @@ export const paymentPlanFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Restock associated Shopify inventory',
+        displayName: 'Restock Associated Shopify Inventory',
         name: 'cancel_shopify_restock',
         type: 'boolean',
         default: false,
@@ -988,7 +995,7 @@ export const paymentPlanFields: INodeProperties[] = [
     },
     // payment_plan:update
     {
-        displayName: 'Payment plan id',
+        displayName: 'Payment Plan ID',
         name: 'payment_plan_id',
         type: 'string',
         default: '',
@@ -1015,7 +1022,7 @@ export const paymentPlanFields: INodeProperties[] = [
     // TODO remaining plan update fields
     // payment_plan:get
     {
-        displayName: 'Payment plan id',
+        displayName: 'Payment Plan ID',
         name: 'payment_plan_id',
         type: 'string',
         default: '',
@@ -1046,7 +1053,7 @@ export const paymentPlanFields: INodeProperties[] = [
         },
     },
     {
-        displayName: 'Search filters',
+        displayName: 'Search Filters',
         name: 'search_filters',
         type: 'collection',
         default: {},
@@ -1058,41 +1065,9 @@ export const paymentPlanFields: INodeProperties[] = [
         },
         options: [
             {
-                displayName: 'Status',
-                name: 'status',
-                type: 'options',
-                default: '',
-                options: [
-                    {
-                        name: 'Checkout',
-                        value: 'checkout',
-                    },
-                    {
-                        name: 'Pending',
-                        value: 'pending',
-                    },
-                    {
-                        name: 'Open',
-                        value: 'open',
-                    },
-                    {
-                        name: 'Canceled',
-                        value: 'canceled',
-                    },
-                    {
-                        name: 'Paid',
-                        value: 'paid',
-                    },
-                    {
-                        name: 'Defaulted',
-                        value: 'defaulted',
-                    }
-                ],
-            },
-            {
-                displayName: 'Customer ID',
-                name: 'customer_id',
-                type: 'string',
+                displayName: 'Created Date',
+                name: 'created_date',
+                type: 'dateTime',
                 default: '',
             },
             {
@@ -1102,28 +1077,60 @@ export const paymentPlanFields: INodeProperties[] = [
                 default: '',
             },
             {
-                displayName: 'Created date',
-                name: 'created_date',
+                displayName: 'Customer ID',
+                name: 'customer_id',
+                type: 'string',
+                default: '',
+            },
+            {
+                displayName: 'Date Range Maximum',
+                name: 'date_range_max',
                 type: 'dateTime',
                 default: '',
             },
             {
-                displayName: 'Date range minimum',
+                displayName: 'Date Range Minimum',
                 name: 'date_range_min',
                 type: 'dateTime',
                 default: '',
             },
             {
-                displayName: 'Date range maximum',
-                name: 'date_range_max',
-                type: 'dateTime',
-                default: '',
+                displayName: 'Status',
+                name: 'status',
+                type: 'options',
+                default: 'checkout',
+                options: [
+                    {
+                        name: 'Canceled',
+                        value: 'canceled',
+                    },
+                    {
+                        name: 'Checkout',
+                        value: 'checkout',
+                    },
+                    {
+                        name: 'Defaulted',
+                        value: 'defaulted',
+                    },
+                    {
+                        name: 'Open',
+                        value: 'open',
+                    },
+                    {
+                        name: 'Paid',
+                        value: 'paid',
+                    },
+                    {
+                        name: 'Pending',
+                        value: 'pending',
+                    }
+                ],
             }
         ]
     },
     // payment_plan:send_plan_request
     {
-        displayName: 'Update plan status to pending',
+        displayName: 'Update Plan Status to Pending',
         name: 'update_plan_status_to_pending',
         type: 'boolean',
         default: false,

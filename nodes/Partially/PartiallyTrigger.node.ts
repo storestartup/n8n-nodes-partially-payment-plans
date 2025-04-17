@@ -3,8 +3,8 @@ import {
 	INodeType,
 	INodeTypeDescription,
 	IWebhookResponseData,
-	NodeConnectionType,
 	IHookFunctions,
+	NodeApiError,
 } from 'n8n-workflow';
 import * as crypto from 'crypto';
 import { partiallyApiRequest } from './GenericFunctions';
@@ -13,7 +13,7 @@ export class PartiallyTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Partially Trigger',
 		name: 'partiallyTrigger',
-		icon: 'file:partially.png',
+		icon: 'file:icon-color.svg',
 		group: ['trigger'],
 		version: 1,
 		description: 'Handle Partially events via webhooks',
@@ -21,7 +21,7 @@ export class PartiallyTrigger implements INodeType {
 			name: 'Partially Trigger',
 		},
 		inputs: [],
-		outputs: [NodeConnectionType.Main],
+		outputs: ['main'],
 		credentials: [
 			{
 				name: 'partiallyApi',
@@ -43,24 +43,24 @@ export class PartiallyTrigger implements INodeType {
 				type: 'options',
 				options: [
 					{
-						name: 'Plan Opened',
-						value: 'plan_opened',
+						name: 'Payment Failed',
+						value: 'payment_failed',
 					},
 					{
-						name: 'Plan Paid',
-						value: 'plan_paid',
+						name: 'Payment Succeeded', 
+						value: 'payment_succeeded',
 					},
 					{
 						name: 'Plan Defaulted',
 						value: 'plan_defaulted',
 					},
 					{
-						name: 'Payment Succeeded',
-						value: 'payment_succeeded',
+						name: 'Plan Opened',
+						value: 'plan_opened',
 					},
 					{
-						name: 'Payment Failed',
-						value: 'payment_failed',
+						name: 'Plan Paid',
+						value: 'plan_paid',
 					},
 				],
 				default: 'plan_opened',
@@ -120,7 +120,10 @@ export class PartiallyTrigger implements INodeType {
 		const signature = req.headers['partially-signature'] || req.headers['Partially-Signature'];
 
 		if (!signature) {
-			throw new Error('Missing Partially-Signature header');
+			throw new NodeApiError(this.getNode(), {
+				message: 'Missing Partially-Signature header',
+				code: 'MISSING_PARTIALLY_SIGNATURE_HEADER',
+			});
 		}
 
 		// Create HMAC SHA-256 hash of the request body
@@ -143,7 +146,10 @@ export class PartiallyTrigger implements INodeType {
 
 		// Compare signatures
 		if (signature !== expectedSignature) {
-			throw new Error('Invalid webhook signature');
+			throw new NodeApiError(this.getNode(), {
+				message: 'Invalid webhook signature',
+				code: 'INVALID_WEBHOOK_SIGNATURE',
+			});
 		}
 
 		const returnData: IWebhookResponseData = {

@@ -5,6 +5,7 @@ export const offerOperations: INodeProperties[] = [
         displayName: 'Operation',
         name: 'operation',
         type: 'options',
+								noDataExpression: true,
         required: true,
         default: 'create',
         displayOptions: {
@@ -17,21 +18,25 @@ export const offerOperations: INodeProperties[] = [
                 name: 'List',
                 value: 'list',
                 description: 'List offers',
+																action: 'List an offer',
             },
             {
                 name: 'Get',
                 value: 'get',
                 description: 'Get an offer',
+																action: 'Get an offer',
             },
             {
                 name: 'Create',
                 value: 'create',
                 description: 'Create a new offer',
+																action: 'Create an offer',
             },
             {
                 name: 'Update',
                 value: 'update',
                 description: 'Update an offer',
+																action: 'Update an offer',
             }
         ],
     },
@@ -100,7 +105,7 @@ export const offerFields: INodeProperties[] = [
         description: 'Default currency to use for payment plans if not specified',
     },
     {
-        displayName: 'Automatically schedule installments',
+        displayName: 'Automatically Schedule Installments',
         name: 'auto_process',
         type: 'boolean',
         default: true,
@@ -110,10 +115,10 @@ export const offerFields: INodeProperties[] = [
                 resource: ['offer'],
             },
         },
-        description: 'If true, the installments will be scheduled automatically according to the provided schedule',
+        description: 'Whether or not to automatically schedule installments according to the provided schedule',
     },
     {
-        displayName: 'Payment schedule description',
+        displayName: 'Payment Schedule Description',
         name: 'description',
         type: 'string',
         default: '',
@@ -130,7 +135,7 @@ export const offerFields: INodeProperties[] = [
         description: 'A description of when you will process payments',
     },
     {
-        displayName: 'Down payment type',
+        displayName: 'Down Payment Type',
         name: 'down_payment_type',
         type: 'options',
         default: 'percentage',
@@ -143,17 +148,17 @@ export const offerFields: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Percentage of plan amount',
+                name: 'Percentage of Plan Amount',
                 value: 'percentage',
             },
             {
-                name: 'Fixed amount',
+                name: 'Fixed Amount',
                 value: 'fixed',
             }
         ]
     },
     {
-        displayName: 'Down payment amount/percentage',
+        displayName: 'Down Payment Amount/percentage',
         name: 'down_payment',
         type: 'number',
         default: 0,
@@ -166,7 +171,7 @@ export const offerFields: INodeProperties[] = [
         }   
     },
     {
-        displayName: 'Down payment flexible',
+        displayName: 'Down Payment Flexible',
         name: 'down_payment_flexible',
         type: 'boolean',
         default: false,
@@ -177,10 +182,10 @@ export const offerFields: INodeProperties[] = [
                 auto_process: [true],
             }
         },
-        description: 'allow the customer to choose their down payment within a specified range',
+        description: 'Whether or not to allow the customer to choose their down payment within a specified range',
     },
     {
-        displayName: 'Minimum down payment amount/percentage',
+        displayName: 'Minimum Down Payment Amount/percentage',
         name: 'down_payment_min',
         type: 'number',
         default: 0,
@@ -194,7 +199,7 @@ export const offerFields: INodeProperties[] = [
         }   
     },
     {
-        displayName: 'Maximum down payment amount/percentage',
+        displayName: 'Maximum Down Payment Amount/percentage',
         name: 'down_payment_max',
         type: 'number',
         default: 0,
@@ -208,7 +213,7 @@ export const offerFields: INodeProperties[] = [
         }   
     },
     {
-        displayName: 'Term units',
+        displayName: 'Term Units',
         name: 'term_units',
         type: 'options',
         default: 'months',
@@ -221,29 +226,29 @@ export const offerFields: INodeProperties[] = [
         },
         options: [
             {
-                name: 'Weeks',
-                value: 'weeks',
+                name: 'Date',
+                value: 'date',
+            },
+            {
+                name: 'Fixed Number of Payments', 
+                value: 'payments',
             },
             {
                 name: 'Months',
                 value: 'months',
             },
             {
+                name: 'Weeks',
+                value: 'weeks',
+            },
+            {
                 name: 'Years',
                 value: 'years',
-            },
-            {
-                name: 'Fixed number of payments',
-                value: 'payments',
-            },
-            {
-                name: 'Date',
-                value: 'date',
             }
         ]
     },
     {
-        displayName: 'Term value',
+        displayName: 'Term Value',
         name: 'term',
         type: 'number',
         default: 3,
@@ -258,7 +263,7 @@ export const offerFields: INodeProperties[] = [
         description: 'The number of weeks, months, years, or payments',
     },
     {
-        displayName: 'Final payment date',
+        displayName: 'Final Payment Date',
         name: 'term_date',
         type: 'dateTime',
         default: '',
@@ -273,7 +278,7 @@ export const offerFields: INodeProperties[] = [
         description: 'The date of the final payment (time will be ignored)',
     },
     {
-        displayName: 'Term flexible',
+        displayName: 'Term Flexible',
         name: 'term_flexible',
         type: 'boolean',
         default: false,
@@ -285,10 +290,10 @@ export const offerFields: INodeProperties[] = [
                 term_units: ['weeks', 'months', 'years', 'payments'],
             }
         },
-        description: 'allow the customer to choose their payment frequency within the specified range',
+        description: 'Whether or not to allow the customer to choose their payment frequency within the specified range',
     },
     {
-        displayName: 'Minimum term',
+        displayName: 'Minimum Term',
         name: 'term_min',
         type: 'number',
         default: 1,
@@ -303,7 +308,7 @@ export const offerFields: INodeProperties[] = [
         description: 'The minimum number of weeks, months, years, or payments',
     },
     {
-        displayName: 'Maximum term',
+        displayName: 'Maximum Term',
         name: 'term_max',
         type: 'number',
         default: 99,
@@ -318,7 +323,7 @@ export const offerFields: INodeProperties[] = [
         description: 'The maximum number of weeks, months, years, or payments',
     },
     {
-        displayName: 'Frequency units',
+        displayName: 'Frequency Units',
         name: 'frequency_units',
         type: 'options',
         default: 'months',
@@ -343,13 +348,13 @@ export const offerFields: INodeProperties[] = [
                 value: 'months',
             },
             {
-                name: 'Specific days of the month',
+                name: 'Specific Days of the Month',
                 value: 'days_month',
             }
         ]
     },
     {
-        displayName: 'Frequency value',
+        displayName: 'Frequency Value',
         name: 'frequency',
         type: 'number',
         default: 1,
@@ -364,7 +369,7 @@ export const offerFields: INodeProperties[] = [
         description: 'The number of days, weeks, or months between payments',
     },
     {
-        displayName: 'Days of the month',
+        displayName: 'Days of the Month',
         name: 'frequency_days',
         type: 'string',
         default: '1,15',
@@ -376,10 +381,10 @@ export const offerFields: INodeProperties[] = [
                 frequency_units: ['days_month'],
             }
         },
-        description: 'The days of the month to process payments (comma separated)',
+        description: 'The days of the month to process payments (comma-separated)',
     },
     {
-        displayName: 'Frequency flexible',
+        displayName: 'Frequency Flexible',
         name: 'frequency_flexible',
         type: 'boolean',
         default: false,
@@ -391,10 +396,10 @@ export const offerFields: INodeProperties[] = [
                 frequency_units: ['days', 'weeks', 'months'],
             }
         },
-        description: 'allow the customer to choose their payment frequency within the specified range',
+        description: 'Whether or not to allow the customer to choose their payment frequency within the specified range',
     },
     {
-        displayName: 'Minimum frequency',
+        displayName: 'Minimum Frequency',
         name: 'frequency_min',
         type: 'number',
         default: 1,
@@ -410,7 +415,7 @@ export const offerFields: INodeProperties[] = [
         description: 'The minimum number of days, weeks, or months between payments',
     },
     {
-        displayName: 'Maximum frequency',
+        displayName: 'Maximum Frequency',
         name: 'frequency_max',
         type: 'number',
         default: 99,
@@ -426,7 +431,7 @@ export const offerFields: INodeProperties[] = [
         description: 'The maximum number of days, weeks, or months between payments',
     },
     {
-        displayName: 'Automatically schedule first installment',
+        displayName: 'Automatically Schedule First Installment',
         name: 'starts_auto',
         type: 'boolean',
         default: true,
@@ -437,10 +442,10 @@ export const offerFields: INodeProperties[] = [
                 auto_process: [true],
             }
         },
-        description: 'If true, the first installment will be scheduled relative to the plan opened date',
+        description: 'Whether or not to automatically schedule the first installment relative to the plan opened date',
     },
     {
-        displayName: 'Date of first installment',
+        displayName: 'Date of First Installment',
         name: 'starts_date',
         type: 'dateTime',
         default: '',

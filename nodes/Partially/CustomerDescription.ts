@@ -5,6 +5,7 @@ export const customerOperations: INodeProperties[] = [
         displayName: 'Operation',
         name: 'operation',
         type: 'options',
+								noDataExpression: true,
         required: true,
         default: 'create',
         displayOptions: {
@@ -17,26 +18,31 @@ export const customerOperations: INodeProperties[] = [
                 name: 'Create',
                 value: 'create',
                 description: 'Create a new customer',
+																action: 'Create a customer',
+            },
+            {
+                name: 'GDPR Remove', 
+                value: 'gdpr_remove',
+                description: 'Remove a customer for GDPR',
+																action: 'GDPR Remove a customer',
             },
             {
                 name: 'Get',
                 value: 'get',   
                 description: 'Get a customer',
-            },
-            {
-                name: 'Update',
-                value: 'update',
-                description: 'Update a customer',
+																action: 'Get a customer',
             },
             {
                 name: 'Search All',
                 value: 'search_all',
                 description: 'Search all customers',
+																action: 'Search all a customer',
             },
             {
-                name: 'GDPR Remove',
-                value: 'gdpr_remove',
-                description: 'Remove a customer for GDPR',
+                name: 'Update',
+                value: 'update',
+                description: 'Update a customer',
+																action: 'Update a customer',
             },
         ],
     }
@@ -48,6 +54,7 @@ export const customerFields: INodeProperties[] = [
         displayName: 'Email',
         name: 'email',
         type: 'string',
+								placeholder: 'name@email.com',
         required: true,
         default: '',
         displayOptions: {
@@ -96,12 +103,6 @@ export const customerFields: INodeProperties[] = [
         },
         options: [
             {
-                displayName: 'Phone Number',
-                name: 'phone',
-                type: 'string',
-                default: '',
-            },
-            {
                 displayName: 'Language',
                 name: 'language',
                 type: 'string',
@@ -109,18 +110,10 @@ export const customerFields: INodeProperties[] = [
                 description: 'Two letter language code (e.g. "en", "fr", "de")',
             },
             {
-                displayName: 'Timezone',
-                name: 'timezone',
+                displayName: 'Phone Number', 
+                name: 'phone',
                 type: 'string',
                 default: '',
-                description: 'Timezone (e.g. "America/New_York", "Europe/London")',
-            },
-            {
-                displayName: 'Shipping Name',
-                name: 'shipto_name',
-                type: 'string',
-                default: '',
-                description: 'Ship to name for customer payment plans',
             },
             {
                 displayName: 'Shipping Address',
@@ -141,6 +134,20 @@ export const customerFields: INodeProperties[] = [
                 default: '',
             },
             {
+                displayName: 'Shipping Country',
+                name: 'shipto_country',
+                type: 'string',
+                default: '',
+                description: 'Two letter country code (e.g. "US", "CA", "UK")',
+            },
+            {
+                displayName: 'Shipping Name',
+                name: 'shipto_name',
+                type: 'string',
+                default: '',
+                description: 'Ship to name for customer payment plans',
+            },
+            {
                 displayName: 'Shipping State',
                 name: 'shipto_state',
                 type: 'string',
@@ -155,11 +162,11 @@ export const customerFields: INodeProperties[] = [
                 description: 'Shipping zip or postal code',
             },
             {
-                displayName: 'Shipping Country',
-                name: 'shipto_country',
+                displayName: 'Timezone',
+                name: 'timezone',
                 type: 'string',
                 default: '',
-                description: 'Two letter country code (e.g. "US", "CA", "UK")',
+                description: 'Timezone (e.g. "America/New_York", "Europe/London")',
             },
             
         ]
@@ -214,6 +221,13 @@ export const customerFields: INodeProperties[] = [
                 default: '',
             },
             {
+                displayName: 'Language',
+                name: 'language',
+                type: 'string',
+                default: '',
+                description: 'Two letter language code (e.g. "en", "fr", "de")',
+            },
+            {
                 displayName: 'Last Name',
                 name: 'last_name',
                 type: 'string',
@@ -226,27 +240,6 @@ export const customerFields: INodeProperties[] = [
                 default: '',
             },
             {
-                displayName: 'Language',
-                name: 'language',
-                type: 'string', 
-                default: '',
-                description: 'Two letter language code (e.g. "en", "fr", "de")',
-                },
-            {
-                displayName: 'Timezone',
-                name: 'timezone',
-                type: 'string',
-                default: '',
-                description: 'Timezone (e.g. "America/New_York", "Europe/London")',
-            },
-            {
-                displayName: 'Shipping Name',
-                name: 'shipto_name',
-                type: 'string',
-                default: '',
-                description: 'Ship to name for customer payment plans',
-            },
-            {
                 displayName: 'Shipping Address',
                 name: 'shipto_address',
                 type: 'string',
@@ -257,12 +250,26 @@ export const customerFields: INodeProperties[] = [
                 name: 'shipto_address2',
                 type: 'string',
                 default: '',
-            },  
+            },
             {
                 displayName: 'Shipping City',
                 name: 'shipto_city',
                 type: 'string',
                 default: '',
+            },
+            {
+                displayName: 'Shipping Country',
+                name: 'shipto_country',
+                type: 'string',
+                default: '',
+                description: 'Two letter country code (e.g. "US", "CA", "UK")',
+            },
+            {
+                displayName: 'Shipping Name',
+                name: 'shipto_name',
+                type: 'string',
+                default: '',
+                description: 'Ship to name for customer payment plans',
             },
             {
                 displayName: 'Shipping State',
@@ -279,11 +286,11 @@ export const customerFields: INodeProperties[] = [
                 description: 'Shipping zip or postal code',
             },
             {
-                displayName: 'Shipping Country',
-                name: 'shipto_country',
+                displayName: 'Timezone',
+                name: 'timezone',
                 type: 'string',
                 default: '',
-                description: 'Two letter country code (e.g. "US", "CA", "UK")',
+                description: 'Timezone (e.g. "America/New_York", "Europe/London")',
             },
         ]
     },
