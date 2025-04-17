@@ -3,7 +3,8 @@ import {
     IExecuteFunctions,
     INodeExecutionData,
     INodeType,
-    INodeTypeDescription
+    INodeTypeDescription,
+    NodeConnectionType
 } from "n8n-workflow";
 
 import {
@@ -82,8 +83,8 @@ export class Partially implements INodeType {
                 required: true
             },
         ],
-        inputs: ['main'],
-        outputs: ['main'],
+        inputs: [NodeConnectionType.Main],
+        outputs: [NodeConnectionType.Main],
         properties: [
             {
                 displayName: 'Resource',

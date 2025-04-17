@@ -5,6 +5,7 @@ import {
 	IWebhookResponseData,
 	IHookFunctions,
 	NodeApiError,
+	NodeConnectionType
 } from 'n8n-workflow';
 import * as crypto from 'crypto';
 import { partiallyApiRequest } from './GenericFunctions';
@@ -21,7 +22,7 @@ export class PartiallyTrigger implements INodeType {
 			name: 'Partially Trigger',
 		},
 		inputs: [],
-		outputs: ['main'],
+		outputs: [NodeConnectionType.Main],
 		credentials: [
 			{
 				name: 'partiallyApi',
@@ -43,6 +44,18 @@ export class PartiallyTrigger implements INodeType {
 				type: 'options',
 				options: [
 					{
+						name: 'Checkout Abandoned',
+						value: 'checkout_abandoned',
+					},
+					{
+						name: 'Dispute Closed',
+						value: 'dispute_closed',
+					},
+					{
+						name: 'Dispute Created',
+						value: 'dispute_created',
+					},
+					{
 						name: 'Payment Failed',
 						value: 'payment_failed',
 					},
@@ -62,6 +75,10 @@ export class PartiallyTrigger implements INodeType {
 						name: 'Plan Paid',
 						value: 'plan_paid',
 					},
+					{
+						name: 'Refund Created',
+						value: 'refund_created',
+					}
 				],
 				default: 'plan_opened',
 				required: true,
