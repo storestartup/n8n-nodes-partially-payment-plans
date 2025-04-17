@@ -2,7 +2,7 @@
 
 ![n8n.io - Workflow Automation](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png)
 
-[n8n](https://www.n8n.io) nodes to trigger workflows from [Partial.ly] webhooks or interact with the API
+[n8n](https://www.n8n.io) nodes to trigger workflows from [Partial.ly](https://partial.ly) webhooks or interact with the API
 
 ## How to install
 
